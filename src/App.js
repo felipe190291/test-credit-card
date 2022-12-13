@@ -1,6 +1,7 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import encriptado from "./encriptado";
 function App() {
   useEffect(() => {
     var input_cvv = document.querySelector(".cvv-input");
@@ -176,6 +177,16 @@ function App() {
       tr.appendChild(td);
     }
     myTableDiv.appendChild(table);
+    setInputs({
+      credit_card_number_1: "####",
+      credit_card_number_2: "####",
+      credit_card_number_3: "####",
+      credit_card_number_4: "####",
+      name: "full name",
+      month: "MM",
+      year: "yy",
+      cvv: "###",
+    });
   }
   function sendform(e) {
     e.preventDefault();
@@ -246,6 +257,8 @@ function App() {
     setInputsError((val) => ({ ...val, [name]: value }));
   };
   var handleChange = (event) => {
+    var usercard = document.getElementById("i_one");
+    console.log(usercard.dataset);
     let name = event.target.name;
     let value = event.target.value;
     setInputs((val) => ({ ...val, [name]: value }));
@@ -294,7 +307,11 @@ function App() {
           <div className="card-container">
             <div className="front" style={imageSelected(backgroundCard)}>
               <div className="image">
-                {logoCompanie ? logoCompanie : <span>BANK_NAME</span>}
+                {logoCompanie ? (
+                  logoCompanie
+                ) : (
+                  <span className="margin-bankinfo">BANK_NAME</span>
+                )}
               </div>
               <div className="image_down">
                 <img src={process.env.PUBLIC_URL + "/img/chip2.png"} alt="" />
@@ -362,6 +379,10 @@ function App() {
             <div className="flexbox inputs-all">
               <div className="inputBox top-level">
                 <input
+                  id="i_one"
+                  data-credit_card_number_1={encriptado(
+                    inputs["credit_card_number_1"]
+                  )}
                   type="number"
                   className="card-number-input"
                   name="credit_card_number_1"
