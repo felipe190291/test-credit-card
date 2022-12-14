@@ -1,3 +1,5 @@
+//sample basic encryption
+
 export function encriptado(input) {
   let encripto = "456" + input.replace("2", "5") + "x" + "456";
   encripto.replace("45", "*").replace("x", "?");

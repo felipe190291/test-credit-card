@@ -119,7 +119,7 @@ export function addTable(inputs) {
     var nuevo = array.concat([userName, userCvv]);
     localStorage.setItem("myArray", JSON.stringify(nuevo));
   } else {
-    localStorage.setItem("myArray", JSON.stringify([userName, userCvv]));
+    localStorage.setItem("myArray", JSON.stringify([userName, userCvv])); //save sensitive data encrypted in storage
   }
 
   var myTableDiv = document.getElementById("listContainer");
