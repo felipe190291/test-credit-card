@@ -42,7 +42,7 @@ const CreditCardComponent = () => {
     month: "MM",
     year: "yy",
     cvv: "###",
-  });
+  }); // inputs start
   useEffect(() => {
     cambiotarget(); // tranform credit card
   });
@@ -87,16 +87,16 @@ const CreditCardComponent = () => {
     }
   }, [bankInformation]);
   var handleChange_error = (name, value) => {
-    setInputsError((val) => ({ ...val, [name]: value }));
+    setInputsError((val) => ({ ...val, [name]: value })); //   localize set error input;
   };
   var handleChange = (event) => {
     let name = event.target.name;
     let value = event.target.value;
-    setInputs((val) => ({ ...val, [name]: value }));
+    setInputs((val) => ({ ...val, [name]: value })); //  localize set value input;
   };
   function sendform(e) {
-    document.getElementById("formPerson").reset();
     e.preventDefault();
+    document.getElementById("formPerson").reset(); //reset form, next form
     let first_number = inputs["credit_card_number_1"];
     let second_number = inputs["credit_card_number_2"];
     let third_number = inputs["credit_card_number_3"];
@@ -126,7 +126,7 @@ const CreditCardComponent = () => {
         month,
         year,
         cvv
-      );
+      ); // errors submit
 
       result.forEach((e) => {
         handleChange_error(e[0], e[1]);
@@ -154,7 +154,7 @@ const CreditCardComponent = () => {
         name: "full name",
         month: "MM",
         year: "yy",
-        cvv: "###",
+        cvv: "###", // reset credit card
       });
     }
   }
