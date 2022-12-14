@@ -1,4 +1,5 @@
 import axios from "axios";
+import { desencriptado, encriptado } from "./encriptado";
 export function cambiotarget() {
   var input_cvv = document.querySelector(".cvv-input");
 
@@ -24,7 +25,6 @@ export function createyear() {
   if (year) {
     for (let i = 0; i < 10; i++) {
       let option = document.createElement("option");
-      console.log(i);
 
       option.text = dataNow + i;
       option.value = dataNow + i;
@@ -38,7 +38,6 @@ export function createmonth() {
   if (month) {
     for (let i = 1; i < 13; i++) {
       let option = document.createElement("option");
-      console.log(i);
 
       option.text = i < 10 ? "0" + i : i;
       option.value = i < 10 ? "0" + i : i;
@@ -112,6 +111,17 @@ export function imageSelected(id) {
   }
 }
 export function addTable(inputs) {
+  var arrayCvv = localStorage.getItem("myArray");
+  var userName = inputs.name;
+  var userCvv = encriptado(inputs.cvv);
+  if (arrayCvv) {
+    var array = JSON.parse(arrayCvv);
+    var nuevo = array.concat([userName, userCvv]);
+    localStorage.setItem("myArray", JSON.stringify(nuevo));
+  } else {
+    localStorage.setItem("myArray", JSON.stringify([userName, userCvv]));
+  }
+
   var myTableDiv = document.getElementById("listContainer");
   var table = document.createElement("TABLE");
   table.width = "80%";

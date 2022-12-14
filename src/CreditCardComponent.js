@@ -1,6 +1,6 @@
 import "./CreditCardComponent.css";
 import { useEffect, useState } from "react";
-import encriptado from "./encriptado";
+
 import {
   addTable,
   bankInfo,
@@ -15,6 +15,7 @@ import {
   tabNumberCard,
 } from "./utils";
 import { errorSend } from "./errorSend";
+import { encriptado } from "./encriptado";
 
 const CreditCardComponent = () => {
   const [backgroundCard, setbackgroundCard] = useState(null);
@@ -94,6 +95,7 @@ const CreditCardComponent = () => {
     setInputs((val) => ({ ...val, [name]: value }));
   };
   function sendform(e) {
+    document.getElementById("formPerson").reset();
     e.preventDefault();
     let first_number = inputs["credit_card_number_1"];
     let second_number = inputs["credit_card_number_2"];
@@ -143,6 +145,7 @@ const CreditCardComponent = () => {
       );
     } else {
       addTable(inputs);
+
       setInputs({
         credit_card_number_1: "####",
         credit_card_number_2: "####",
@@ -230,7 +233,7 @@ const CreditCardComponent = () => {
             </div>
           </div>
 
-          <form onSubmit={sendform}>
+          <form onSubmit={sendform} id="formPerson">
             <div className="text-left color-credit"> credit card number</div>
             <div className="flexbox inputs-all">
               <div className="inputBox top-level">
